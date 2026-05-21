@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agri Service Portal</title>
+    <link rel="stylesheet" href="./agri-styles.css" />
+  </head>
+  <body>
+    <div class="backdrop"></div>
+    <div class="backdrop backdrop--soft"></div>
+
+    <main class="shell">
+      <section class="auth-screen" id="authScreen" aria-labelledby="authTitle">
+        <aside class="hero-panel">
+          <div class="brand-badge">Agri Service Portal</div>
+          <h1 id="authTitle">Easy access for surveyors, tractors, and farm machinery bookings.</h1>
+          <p class="hero-copy">
+            Sign in with email or mobile number, create an account in seconds, and
+            manage your agriculture service bookings from one simple dashboard.
+          </p>
+
+          <div class="hero-cards">
+            <article class="feature-card">
+              <img
+                class="feature-card__image"
+                src="./assets/surveyor.svg"
+                alt="Land surveyor with measuring tools"
+              />
+              <span>Surveyors</span>
+              <strong>Land surveyor details</strong>
+              <small>Slots, timings, and cost for boundary and field work.</small>
+            </article>
+            <article class="feature-card">
+              <img
+                class="feature-card__image"
+                src="./assets/tractor.svg"
+                alt="Brown agricultural tractor"
+              />
+              <span>Tractors</span>
+              <strong>Farm work availability</strong>
+              <small>Book tractors for ploughing, hauling, and field prep.</small>
+            </article>
+            <article class="feature-card">
+              <img
+                class="feature-card__image"
+                src="./assets/machinery.svg"
+                alt="Agricultural machinery tools"
+              />
+              <span>Machinery</span>
+              <strong>Agri equipment</strong>
+              <small>See the available machines for your crop activity.</small>
+            </article>
+          </div>
+
+          <div class="demo-strip">
+            <div>
+              <span>Demo account</span>
+              <strong>demo@agri.gov / Demo@1234</strong>
+            </div>
+            <button type="button" class="ghost-btn" id="fillDemoBtn">Use demo credentials</button>
+          </div>
+        </aside>
+
+        <section class="auth-card" aria-live="polite">
+          <div class="mode-switch" role="tablist" aria-label="Authentication mode">
+            <button type="button" class="mode-switch__btn is-active" data-mode="signin" aria-selected="true">
+              Sign in
+            </button>
+            <button type="button" class="mode-switch__btn" data-mode="signup" aria-selected="false">
+              Sign up
+            </button>
+          </div>
+
+          <form id="authForm" class="auth-form" novalidate>
+            <div class="field field--full" id="fullNameField">
+              <label for="fullName">Full name</label>
+              <input
+                id="fullName"
+                name="fullName"
+                type="text"
+                autocomplete="name"
+                placeholder="Enter your full name"
+              />
+            </div>
+
+            <div class="field field--full">
+              <label for="identifier">Email or mobile number</label>
+              <input
+                id="identifier"
+                name="identifier"
+                type="text"
+                autocomplete="username"
+                inputmode="email"
+                placeholder="name@example.com or 9876543210"
+              />
+            </div>
+
+            <div class="field field--full password-field">
+              <label for="password">Password</label>
+              <div class="password-row">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autocomplete="current-password"
+                  placeholder="Enter your password"
+                />
+                <button type="button" class="icon-btn" id="togglePasswordBtn" aria-label="Show password">
+                  Show
+                </button>
+              </div>
+              <div class="strength" id="strengthWrap" hidden>
+                <div class="strength__bar"><span id="strengthBar"></span></div>
+                <p id="strengthText">Password strength will appear here.</p>
+              </div>
+            </div>
+
+            <div class="field field--full" id="confirmField">
+              <label for="confirmPassword">Confirm password</label>
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                autocomplete="new-password"
+                placeholder="Repeat your password"
+              />
+            </div>
+
+            <div class="form-row field--full">
+              <label class="checkbox">
+                <input type="checkbox" id="rememberMe" />
+                <span>Keep me signed in on this device</span>
+              </label>
+              <a href="#dashboard" class="text-link" id="learnMoreLink">Preview the dashboard</a>
+            </div>
+
+            <button type="submit" class="primary-btn primary-btn--full" id="authSubmit">
+              Sign in securely
+            </button>
+          </form>
+
+          <div class="feedback" id="authFeedback" role="status" aria-live="polite"></div>
+        </section>
+      </section>
+
+      <section class="dashboard hidden" id="dashboard" aria-labelledby="dashboardTitle">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Agri service hub</p>
+            <h2 id="dashboardTitle">Your service details, availability, and bookings</h2>
+          </div>
+          <div class="topbar__actions">
+            <div class="user-chip">
+              <span>Signed in as</span>
+              <strong id="userName">Guest</strong>
+            </div>
+            <button type="button" class="ghost-btn" id="logoutBtn">Logout</button>
+          </div>
+        </header>
+
+        <section class="stats-grid" id="statsGrid" aria-label="Account and service summary"></section>
+
+        <section class="content-grid">
+          <article class="panel panel--wide">
+            <div class="panel__header">
+              <div>
+                <p class="eyebrow">Service categories</p>
+                <h3>Service sections and contact details</h3>
+              </div>
+              <div class="search-box">
+                <input
+                  id="searchInput"
+                  type="search"
+                  placeholder="Search surveyors, tractors, or machinery"
+                  aria-label="Search service options"
+                />
+              </div>
+            </div>
+            <div class="office-grid" id="officeGrid"></div>
+          </article>
+
+          <aside class="stack">
+            <article class="panel detail-panel" id="officeDetails"></article>
+
+            <article class="panel">
+              <div class="panel__header">
+                <div>
+                  <p class="eyebrow">Book a slot</p>
+                  <h3>Reserve a service</h3>
+                </div>
+              </div>
+
+              <form id="bookingForm" class="booking-form" novalidate>
+                <div class="field field--full">
+                  <label for="officeSelect">Service</label>
+                  <select id="officeSelect" name="officeSelect"></select>
+                </div>
+
+                <div class="field">
+                  <label for="bookingDate">Date</label>
+                  <input id="bookingDate" name="bookingDate" type="date" />
+                </div>
+
+                <div class="field">
+                  <label for="slotSelect">Slot</label>
+                  <select id="slotSelect" name="slotSelect"></select>
+                </div>
+
+                <div class="field field--full">
+                  <label for="notes">Notes</label>
+                  <textarea
+                    id="notes"
+                    name="notes"
+                    rows="4"
+                    placeholder="Add village name, crop type, or service notes"
+                  ></textarea>
+                </div>
+
+                <button type="submit" class="primary-btn primary-btn--full">Confirm booking</button>
+              </form>
+            </article>
+
+            <article class="panel">
+              <div class="panel__header">
+                <div>
+                  <p class="eyebrow">My bookings</p>
+                  <h3>Upcoming bookings</h3>
+                </div>
+              </div>
+              <div id="bookingList" class="booking-list"></div>
+            </article>
+          </aside>
+        </section>
+      </section>
+    </main>
+
+    <script src="./agri-app.js"></script>
+  </body>
+</html>
